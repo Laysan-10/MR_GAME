@@ -1,5 +1,11 @@
 {
   "dependencies": {
+    "com.unity.shadergraph": "14.0.11",
+    "com.unity.xr.arfoundation": "5.1.5",
+    "com.unity.xr.hands": "1.4.3",
+    "com.unity.xr.interaction.toolkit": "2.6.3",
+    "com.unity.xr.meta-openxr": "1.0.1",
+    "com.unity.xr.openxr": "1.12.1",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.androidjni": "1.0.0",
     "com.unity.modules.animation": "1.0.0",
