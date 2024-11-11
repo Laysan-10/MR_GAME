@@ -13,6 +13,8 @@ public class DebugMode : MonoBehaviour
     private bool _isVisualise; // Текущее состояние визуализации
     private ARPlaneManager _planeManager; // Компонент для управления AR-плоскостями
 
+    [SerializeField] private Canvas debugPanel;
+
     private void Awake()
     {
 
@@ -49,7 +51,7 @@ public class DebugMode : MonoBehaviour
     private void OnToggleSurfaceRendering(InputAction.CallbackContext obj)
     {
         _isVisualise = !_isVisualise; // Переключение состояния визуализации
-
+        debugPanel.enabled = _isVisualise;
         PlaneUpdateVisualisation();
     }
 
