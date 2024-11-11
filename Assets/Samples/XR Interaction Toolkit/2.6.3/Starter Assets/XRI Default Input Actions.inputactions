@@ -2730,6 +2730,34 @@
                     "isPartOfComposite": true
                 }
             ]
+        },
+        {
+            "name": "Extension",
+            "id": "496c37d2-fa28-4e4a-8f81-265dac945e03",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "f4a26dc4-11c0-4514-8d6a-8040e4297685",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "1780939a-a512-454f-a10a-b157e273c87a",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [
