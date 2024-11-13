@@ -16,24 +16,28 @@ public class SpawnerMulticoloredCubes : MonoBehaviour
 	[SerializeField] private PlaneClassification targetPlaneClassification;
 	[SerializeField] private GameObject objectPrefab;
 
-private void OnEnable()
-{
-	spawnAction.action.Enable();
-	spawnAction.action.performed += OnSpawn;
-}
+//private void OnEnable()
+//{
+//	spawnAction.action.Enable();
+//	spawnAction.action.performed += OnSpawn;
+//}
 
-private void OnDisable()
+//private void OnDisable()
+//{
+//	spawnAction.action.Disable();
+//	spawnAction.action.performed -= OnSpawn;
+//}
+
+public void OnSpawn(/*InputAction.CallbackContext context*/)
 {
-	spawnAction.action.Disable();
-	spawnAction.action.performed -= OnSpawn;
-}
-private void OnSpawn(InputAction.CallbackContext context)
-{
+		Debug.Log("OnSpawn");
 	if (xrRayInteractor.enabled && xrRayInteractor.TryGetCurrent3DRaycastHit(out var raycastHit, out _))
 	{
-		if (raycastHit.transform.TryGetComponent(out ARPlane arPlane) && (arPlane.classification & targetPlaneClassification) != 0)
+            Debug.Log("1");
+            if (raycastHit.transform.TryGetComponent(out ARPlane arPlane) && (arPlane.classification & targetPlaneClassification) != 0)
 		{
-			var hitPose = new Pose(raycastHit.point, Quaternion.LookRotation(raycastHit.normal));
+                Debug.Log("2");
+                var hitPose = new Pose(raycastHit.point, Quaternion.LookRotation(raycastHit.normal));
 
 			var instantiate = Instantiate(objectPrefab, hitPose.position, hitPose.rotation);
 			instantiate.name = "SpawnedObject";
@@ -46,7 +50,8 @@ private void OnSpawn(InputAction.CallbackContext context)
 
 		if (raycastHit.transform.name == "SpawnedObject")
 		{
-			Destroy(raycastHit.transform.gameObject);
+                Debug.Log("3");
+                Destroy(raycastHit.transform.gameObject);
 
 			return;
 		}
