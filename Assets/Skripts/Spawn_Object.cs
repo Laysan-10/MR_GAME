@@ -22,7 +22,7 @@ public class Spawn_Object : MonoBehaviour
 	  // Создаем объект в позиции руки (с небольшим смещением для видимости)
 	  var spawnPosition = xrRayInteractor.transform.position + xrRayInteractor.transform.forward * 0.5f; 
 	  var spawnedObject = Instantiate(_spawn, spawnPosition, xrRayInteractor.transform.rotation);
-
+		spawnedObject.AddComponent<ARAnchor>(); 
 	}
   }
 }
