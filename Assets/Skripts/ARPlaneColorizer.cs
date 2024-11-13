@@ -6,52 +6,53 @@ using UnityEngine.XR.ARSubsystems;
 [RequireComponent(typeof(MeshRenderer))]
 public class ARPlaneColorizer : MonoBehaviour
 {
-    // Свойство для управления визуализацией плоскости
+   
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     public bool isVisualise
     {
         get => _isVisualise;
         set
         {
             _isVisualise = value;
-            UpdateColor(); // Обновляем цвет при изменении значения
+            UpdateColor(); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         }
     }
 
-    private const float DEFAULT_COLOR_ALPHA = 0.25f; // Прозрачность цвета по умолчанию
-    private bool _isVisualise; // Внутреннее поле для свойства isVisualise
-    private Color _defaultColor; // Цвет по умолчанию, определенный на основе классификации
+    private const float DEFAULT_COLOR_ALPHA = 0.25f; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+    private bool _isVisualise; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ isVisualise
+    private Color _defaultColor; // пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-    private ARPlane _arPlane; // Компонент ARPlane
-    private MeshRenderer _meshRenderer; // Компонент MeshRenderer
-    private LineRenderer _lineRenderer; // Компонент LineRenderer
+    private ARPlane _arPlane; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ ARPlane
+    private MeshRenderer _meshRenderer; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ MeshRenderer
+    private LineRenderer _lineRenderer; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ LineRenderer
 
     private void Awake()
     {
-        // Инициализация компонентов
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         _arPlane = GetComponent<ARPlane>();
         _meshRenderer = GetComponent<MeshRenderer>();
         _lineRenderer = GetComponent<LineRenderer>();
 
         if (_arPlane == null || _meshRenderer == null)
         {
-            Debug.LogError("ARPlane или MeshRenderer компонент отсутствует.");
+            Debug.LogError("ARPlane пїЅпїЅпїЅ MeshRenderer пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.");
             return;
         }
 
-        // Получаем цвет материала по классификации
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         _defaultColor = GetColorByClassification(_arPlane.classification);
-        _defaultColor.a = DEFAULT_COLOR_ALPHA; // Устанавливаем прозрачность цвета
+        _defaultColor.a = DEFAULT_COLOR_ALPHA; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 
-        // Устанавливаем начальный цвет
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
         UpdateColor();
 
-        // Подписка на событие изменения границ плоскости
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         _arPlane.boundaryChanged += OnPlaneBoundaryChanged;
     }
 
     private void OnDestroy()
     {
-        // Отписываемся от события при уничтожении объекта
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         if (_arPlane != null)
         {
             _arPlane.boundaryChanged -= OnPlaneBoundaryChanged;
@@ -60,18 +61,18 @@ public class ARPlaneColorizer : MonoBehaviour
 
     private void OnPlaneBoundaryChanged(ARPlaneBoundaryChangedEventArgs eventArgs)
     {
-        // Обновляем цвет при изменении границ плоскости
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         UpdateColor();
     }
 
-    // Метод для обновления цвета материала плоскости
+    // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     private void UpdateColor()
     {
         _meshRenderer.materials[0].color = _isVisualise ? Color.clear : _defaultColor;
         _lineRenderer.startColor = _isVisualise ? Color.clear : Color.white;
     }
 
-    // Метод для получения цвета на основе классификации плоскости
+    // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     private static Color GetColorByClassification(PlaneClassification classifications) => classifications switch
     {
         PlaneClassification.None => Color.green,
@@ -83,6 +84,6 @@ public class ARPlaneColorizer : MonoBehaviour
         PlaneClassification.Door => Color.blue,
         PlaneClassification.Window => new Color(1f, 0.4f, 0f), //orange
         PlaneClassification.Other => Color.magenta,
-        _ => Color.gray // Цвет по умолчанию
+        _ => Color.gray // пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     };
 }
