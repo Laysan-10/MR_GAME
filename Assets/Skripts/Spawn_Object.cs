@@ -5,17 +5,22 @@ using UnityEngine.Events;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.InputSystem;
+using System;
+using UnityEngine.XR.Hands.Samples.GestureSample;
 
 public class Spawn_Object : MonoBehaviour
 {
 	// XRRayInteractor для определения точки спавна
 	[SerializeField] private XRRayInteractor xrRayInteractor;
+	[SerializeField] private CarController car;
+	[SerializeField] private StaticHandGesture _thumpup;
+    [SerializeField] private StaticHandGesture _thumpdown;
 
-	// Ссылка на Input Action 
-	
+    // Ссылка на Input Action 
 
-	// Метод, вызываемый при нажатии на кнопку в руке
-	public void SpawnObject(GameObject _spawn)
+
+    // Метод, вызываемый при нажатии на кнопку в руке
+    public void SpawnObject(GameObject _spawn)
 	{
 	if (xrRayInteractor.enabled)
 	{
@@ -32,4 +37,16 @@ public class Spawn_Object : MonoBehaviour
 		_panel.transform.position = spawnPosition;
 		_panel.active = true;
 	}
+	public void Car_Spawner(GameObject _car)
+	{
+		
+        var spawnPosition = xrRayInteractor.transform.position + xrRayInteractor.transform.forward * 0.5f;
+        var spawnedObject = Instantiate(_car, spawnPosition, xrRayInteractor.transform.rotation);
+		car = FindObjectOfType<CarController>();
+		car._raycast = FindObjectOfType<RayCast_For_Car>();
+        _thumpdown.gesturePerformed.AddListener(car.GoReverse);
+		_thumpup.gesturePerformed.AddListener(car.GoForward);
+
+    }
+    
 }

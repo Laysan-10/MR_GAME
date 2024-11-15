@@ -395,7 +395,7 @@ public class CarController : MonoBehaviour
             //	InvokeRepeating("DecelerateCar", 0f, 0.1f);
             //	deceleratingCar = true;
             //}
-            if (_raycast.angle >= 0 && _raycast.angle <= 20)
+            if (_raycast.angle >= 0  && _raycast.angle <= 20)
             {
                 ResetSteeringAngle();
             }

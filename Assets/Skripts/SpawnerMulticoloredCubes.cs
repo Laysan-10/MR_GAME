@@ -16,19 +16,19 @@ public class SpawnerMulticoloredCubes : MonoBehaviour
 	[SerializeField] private PlaneClassification targetPlaneClassification;
 	[SerializeField] private GameObject objectPrefab;
 
-//private void OnEnable()
-//{
-//	spawnAction.action.Enable();
-//	spawnAction.action.performed += OnSpawn;
-//}
+	private void OnEnable()
+	{
+		spawnAction.action.Enable();
+		spawnAction.action.performed += OnSpawn;
+	}
 
-//private void OnDisable()
-//{
-//	spawnAction.action.Disable();
-//	spawnAction.action.performed -= OnSpawn;
-//}
+	private void OnDisable()
+	{
+		spawnAction.action.Disable();
+		spawnAction.action.performed -= OnSpawn;
+	}
 
-public void OnSpawn(/*InputAction.CallbackContext context*/)
+	public void OnSpawn(InputAction.CallbackContext context)
 {
 		Debug.Log("OnSpawn");
 	if (xrRayInteractor.enabled && xrRayInteractor.TryGetCurrent3DRaycastHit(out var raycastHit, out _))
