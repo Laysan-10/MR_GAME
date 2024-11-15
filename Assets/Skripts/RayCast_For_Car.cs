@@ -9,9 +9,10 @@ public class RayCast_For_Car : MonoBehaviour
     public Transform rayOrigin; // Точка, из которой исходит луч
     public float rayLength = 10f; // Длина луча
     public Transform hand;
+    public float angle;
 
 
- 
+
     public LayerMask layerMask;
 
 
@@ -22,6 +23,7 @@ public class RayCast_For_Car : MonoBehaviour
         // Направление луча (вверх)
         Vector3 direction = transform.position;
         Vector3 direction_2 = transform.forward;
+
 
         // Начало луча
         Vector3 origin = rayOrigin.position;
@@ -35,7 +37,7 @@ public class RayCast_For_Car : MonoBehaviour
 
 
         float dotProduct = Vector3.Dot(direction, direction_2);
-        float angle = Mathf.Acos(dotProduct) * Mathf.Rad2Deg;
+        angle = Mathf.Acos(dotProduct) * Mathf.Rad2Deg;
 
 
         RaycastHit hit;
@@ -54,7 +56,7 @@ public class RayCast_For_Car : MonoBehaviour
 
         angle *= sign;
 
-        Debug.Log("Угол между лучами: " + angle);
+        //Debug.Log("Угол между лучами: " + angle);
 
         //узнать угол между двумя raycast
     }
