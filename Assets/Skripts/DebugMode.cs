@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.ARFoundation;
 
+
 [RequireComponent(typeof(ARPlaneManager))]
 public class DebugMode : MonoBehaviour
 {
@@ -68,4 +69,5 @@ public class DebugMode : MonoBehaviour
 			}
 		}
 	}
+	
 }
